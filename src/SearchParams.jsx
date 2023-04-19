@@ -1,79 +1,18 @@
 import { useEffect, useState } from "react";
 import Results from "./Results";
-import useBreedList from "./useBreedList";
-
-const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
+import SearchForm from "./SearchForm";
+import requestPets from "./requestPets";
 
 const SearchParams = () => {
-  const [location, setLocation] = useState(""); // the mock API works with strings, try: "Seattle, WA"
-  const [animal, setAnimal] = useState("");
-  const [breed, setBreed] = useState("");
-  const [pets, setPet] = useState([]);
-  const [breeds] = useBreedList(animal);
+  const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    requestPets();
-    // empty array as dependency in next line only runs once after first render (as intended in this case)
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  async function requestPets() {
-    const res = await fetch(
-      `https://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-    );
-    const json = await res.json();
-
-    setPet(json.pets);
-  }
+    requestPets({ setPets });
+  }, []);
 
   return (
     <div className="search-params">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          requestPets();
-        }}
-      >
-        <label htmlFor="location">
-          Location
-          <input
-            onChange={(e) => setLocation(e.target.value)}
-            type="text"
-            id="location"
-            value={location}
-            placeholder="Location"
-          />
-        </label>
-        <label htmlFor="animal">
-          Animal
-          <select
-            id="animal"
-            value={animal}
-            onChange={(e) => {
-              setAnimal(e.target.value);
-              setBreed("");
-            }}
-          >
-            <option value="" />
-            {ANIMALS.map((animal) => (
-              <option key={animal}>{animal}</option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="breed">
-          Breed
-          <select
-            id="breed"
-            value={breed}
-            onChange={(e) => setBreed(e.target.value)}
-            disabled={breeds.length === 0}
-          >
-            <option value="" />
-            {breeds.map((breed) => (
-              <option key={breed}>{breed}</option>
-            ))}
-          </select>
-        </label>
-        <button>Submit</button>
-      </form>
+      <SearchForm setPets={setPets} />
       <Results pets={pets} />
     </div>
   );
