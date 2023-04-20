@@ -1,18 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Results from "./Results";
 import SearchForm from "./SearchForm";
-import requestPets from "./requestPets";
+import fetchSearch from "./fetchSearch";
 
 const SearchParams = () => {
-  const [pets, setPets] = useState([]);
+  const [requestParams, setRequestParams] = useState({
+    location: "",
+    animal: "",
+    breed: "",
+  });
 
-  useEffect(() => {
-    requestPets({ setPets });
-  }, []);
+  const results = useQuery(["search", requestParams], fetchSearch);
+
+  const pets = results?.data?.pets ?? [];
 
   return (
     <div className="search-params">
-      <SearchForm setPets={setPets} />
+      <SearchForm
+        /* requestParams={requestParams} */
+        setRequestParams={setRequestParams}
+      />
       <Results pets={pets} />
     </div>
   );
