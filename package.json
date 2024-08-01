@@ -1,0 +1,31 @@
+{
+  "name": "2022-12-bholt-react-intro-v8-and-react-intermediate-v5",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "'Adopt me' project for the 2022 Frontend Masters course 'Complete intro to React 8'",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/40detectives/react-intro-v8-and-react-intermediate-v5.git"
+  },
+  "keywords": [
+    "react",
+    "course",
+    "javascript"
+  ],
+  "author": "40detectives",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/40detectives/react-intro-v8-and-react-intermediate-v5/issues"
+  },
+  "homepage": "https://github.com/40detectives/react-intro-v8-and-react-intermediate-v5#readme",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3"
+  }
+}
