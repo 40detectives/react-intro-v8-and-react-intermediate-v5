@@ -27,10 +27,13 @@
   },
   "homepage": "https://github.com/40detectives/react-intro-v8-and-react-intermediate-v5#readme",
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react": "^7.35.0",
     "prettier": "^3.3.3",
-    "@vitejs/plugin-react": "^4.3.1",
     "vite": "^5.3.5"
   },
   "dependencies": {
