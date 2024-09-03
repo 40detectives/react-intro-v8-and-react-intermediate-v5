@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
+import ErrorBoundary from "./ErrorBoundary";
 import fetchPet from "./fetchPet";
 
-const Details = () => {
+const Details = (props) => {
   const { id } = useParams();
   const results = useQuery({ queryKey: ["details", id], queryFn: fetchPet });
 
@@ -42,4 +43,13 @@ const Details = () => {
   );
 };
 
-export default Details;
+function DetailsErrorBoundary(props) {
+  // for more info take a look at:
+  // https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
+  return (
+    <ErrorBoundary>
+      <Details {...props} />
+    </ErrorBoundary>
+  );
+}
+export default DetailsErrorBoundary;
