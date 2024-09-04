@@ -41,12 +41,12 @@ const SearchParams = () => {
         ) : null}
         <label htmlFor="location">
           Location
-          <input className="mb-5 block w-60" name="location" type="text" id="location" placeholder="Seattle, WA" />
+          <input className="search-input" name="location" type="text" id="location" placeholder="Seattle, WA" />
         </label>
         <label htmlFor="animal">
           Animal
           <select
-            className="mb-5 block w-60"
+            className="search-input"
             name="animal"
             id="animal"
             value={animal}
@@ -62,7 +62,12 @@ const SearchParams = () => {
         </label>
         <label htmlFor="breed">
           Breed
-          <select className="mb-5 block w-60 disabled:opacity-50" id="breed" disabled={breeds.length === 0} name="breed">
+          <select
+            className="search-input grayed-out-disabled"
+            id="breed"
+            disabled={breeds.length === 0}
+            name="breed"
+          >
             <option />
             {breeds.map((breed) => (
               <option key={breed}>{breed}</option>
