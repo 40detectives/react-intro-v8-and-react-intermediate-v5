@@ -11,6 +11,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: Infinity, // if number, put it in ms
       gcTime: Infinity, // if number, put it in ms
+      suspense: true,
     },
   },
 });
