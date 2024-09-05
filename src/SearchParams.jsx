@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useDeferredValue, useMemo, useState } from "react";
+import { useContext, useDeferredValue, useState } from "react";
 import AdoptedPetContext from "./AdoptedPetContext";
 import fetchSearch from "./fetchSearch";
 import Results from "./Results";
@@ -20,7 +20,6 @@ const SearchParams = () => {
   const pets = results?.data?.pets ?? [];
 
   const deferredPets = useDeferredValue(pets);
-  const renderedPets = useMemo(() => <Results pets={deferredPets} />, [deferredPets]);
 
   return (
     <div className="search-params">
@@ -72,7 +71,7 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
-      {renderedPets}
+      <Results pets={deferredPets} />
     </div>
   );
 };

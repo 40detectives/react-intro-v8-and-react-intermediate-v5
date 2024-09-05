@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Pet from "./Pet";
 
 const Results = ({ pets }) => {
@@ -22,4 +23,6 @@ const Results = ({ pets }) => {
   );
 };
 
-export default Results;
+const MemoizedResult = memo(Results);
+
+export default MemoizedResult;
