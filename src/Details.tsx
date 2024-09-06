@@ -7,11 +7,14 @@ import ErrorBoundary from "./ErrorBoundary";
 import fetchPet from "./fetchPet";
 import Modal from "./Modal";
 
-const Details = (props) => {
+const Details = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const [, setAdoptedPet] = useContext(AdoptedPetContext);
   const { id } = useParams();
+  if (!id) {
+    throw new Error("why did you not give me an id?! I wanted an Id. I have no id");
+  }
   const results = useQuery({ queryKey: ["details", id], queryFn: fetchPet });
 
   if (results.isError) {
@@ -32,7 +35,10 @@ const Details = (props) => {
     );
   }
 
-  const pet = results.data.pets[0];
+  const pet = results?.data?.pets[0];
+  if (!pet) {
+    throw new Error("no pet lol");
+  }
 
   return (
     <div className="details">
@@ -67,12 +73,12 @@ const Details = (props) => {
   );
 };
 
-function DetailsErrorBoundary(props) {
+function DetailsErrorBoundary() {
   // for more info take a look at:
   // https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <Details />
     </ErrorBoundary>
   );
 }
