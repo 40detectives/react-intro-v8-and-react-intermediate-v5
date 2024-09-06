@@ -9,9 +9,23 @@
   ],
   "rules": {
     "react/prop-types": 0,
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "@typescript-eslint/no-empty-function": 0
   },
-  "plugins": ["import", "react", "react-hooks", "jsx-a11y"],
+  "plugins": ["import", "react", "react-hooks", "jsx-a11y", "@typescript-eslint"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": 2023,
     "sourceType": "module",
@@ -29,9 +43,12 @@
       "version": "detect"
     },
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx"]
+      "typescript": {
+        "alwaysTryTypes": true
       }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     }
   }
 }
