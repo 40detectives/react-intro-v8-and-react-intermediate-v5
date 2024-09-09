@@ -1,11 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { adopt } from "./adoptedPetSlice";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
-import fetchPet from "./fetchPet";
+import { useGetPetQuery } from "./petApiService";
 import Modal from "./Modal";
 
 const Details = (props) => {
@@ -13,9 +12,9 @@ const Details = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const results = useQuery({ queryKey: ["details", id], queryFn: fetchPet });
+  const { isLoading, isError, data: pet } = useGetPetQuery(id);
 
-  if (results.isError) {
+  if (isError) {
     return (
       <div className="loading-pane">
         <h2 className="loader">💀</h2>
@@ -25,15 +24,13 @@ const Details = (props) => {
     );
   }
 
-  if (results.isLoading) {
+  if (isLoading) {
     return (
       <div className="loading-pane">
         <h2 className="loader">🐣</h2>
       </div>
     );
   }
-
-  const pet = results.data.pets[0];
 
   return (
     <div className="details">
