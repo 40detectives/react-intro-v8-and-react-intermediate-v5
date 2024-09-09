@@ -7,4 +7,7 @@ export default defineConfig({
   build: {
     outDir: "../dist", // if not, will try to output to the folderd: "<current dir>/dist"
   },
+  test: {
+    environment: "happy-dom",
+  },
 });
