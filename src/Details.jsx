@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import AdoptedPetContext from "./AdoptedPetContext";
+import { adopt } from "./adoptedPetSlice";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import fetchPet from "./fetchPet";
@@ -10,7 +11,7 @@ import Modal from "./Modal";
 const Details = (props) => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const [, setAdoptedPet] = useContext(AdoptedPetContext);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const results = useQuery({ queryKey: ["details", id], queryFn: fetchPet });
 
@@ -51,7 +52,7 @@ const Details = (props) => {
               <div className="buttons">
                 <button
                   onClick={() => {
-                    setAdoptedPet(pet);
+                    dispatch(adopt(pet));
                     navigate("/"); // this changes the location programatically to the root route
                   }}
                 >
