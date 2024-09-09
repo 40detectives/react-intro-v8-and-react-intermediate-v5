@@ -1,18 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import fetchSearch from "./fetchSearch";
 import Results from "./Results";
+import { all } from "./searchParamsSlice";
 import useBreedList from "./useBreedList";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
-  const [requestParams, setRequestParams] = useState({
-    location: "", // the mock API works with strings, try: "Seattle, WA"
-    animal: "",
-    breed: "",
-  });
+  const dispatch = useDispatch();
+  const requestParams = useSelector((state) => state.searchParams.value);
   const [animal, setAnimal] = useState(""); // this state needs to be controlled because it feeds the breeds
   const [breeds] = useBreedList(animal);
   const adoptedPet = useSelector((state) => state.adoptedPet.value);
@@ -30,7 +28,7 @@ const SearchParams = () => {
             breed: formData.get("breed") ?? "",
             location: formData.get("location") ?? "",
           };
-          setRequestParams(obj);
+          dispatch(all(obj));
         }}
       >
         {adoptedPet ? (
