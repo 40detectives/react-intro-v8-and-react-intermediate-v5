@@ -4,6 +4,9 @@
   "type": "module",
   "description": "'Adopt me' project for the 2022 Frontend Masters course 'Complete intro to React 8'",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,8 +27,10 @@
   },
   "homepage": "https://github.com/40detectives/react-intro-v8-and-react-intermediate-v5#readme",
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.2",
-    "prettier": "^3.7.4"
+    "prettier": "^3.7.4",
+    "vite": "^7.3.0"
   }
 }
